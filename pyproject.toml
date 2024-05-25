@@ -1,0 +1,13 @@
+[tool.poetry]
+name = "codespace_test_module"
+version = "0.1.0"
+description = ""
+authors = ["056wagomu <ohayotonkatsu@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
