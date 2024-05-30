@@ -17,6 +17,8 @@
 			"settings": {
 				"editor.renderWhitespace": "all",
 				"python.defaultInterpreterPath": ".venv/bin/python",
+				"python.testing.pytestArgs": ["tests", "--capture=tee-sys", "-vv"],
+        		"python.testing.pytestEnabled": true,
 				"[python]": {
 					"editor.defaultFormatter": "charliermarsh.ruff",
 					"editor.formatOnSave": true,
