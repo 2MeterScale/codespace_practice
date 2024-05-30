@@ -13,21 +13,34 @@
 		"source=venv-${devcontainerId},target=${containerWorkspaceFolder}/.venv,type=volume"
 	],
 	"customizations": {
-		"settings": {
-			"editor.renderWhitespace": "all",
-			"[json][jsonc]": {
-				"editor.defaultFormatter": "esbenp.prettier-vscode",
-				"editor.formatOnSave": true,
-          		"editor.codeActionsOnSave": {
-            		"source.fixAll": true
-          		}
-        	}
-      	},
-		"extensions": [
-			"esbenp.prettier-vscode",
-			"ms-python.python",
-			"njpwerner.autodocstring",
-        	"KevinRose.vsc-python-indent"
-		]
+		"vscode": {
+			"settings": {
+				"editor.renderWhitespace": "all",
+				"python.defaultInterpreterPath": ".venv/bin/python",
+				"[python]": {
+					"editor.defaultFormatter": "charliermarsh.ruff",
+					"editor.formatOnSave": true,
+					"editor.codeActionsOnSave": {
+					"source.fixAll": true,
+					"source.organizeImports": true
+					}
+				},
+				"[json][jsonc]": {
+					"editor.defaultFormatter": "esbenp.prettier-vscode",
+					"editor.formatOnSave": true,
+					"editor.codeActionsOnSave": {
+						"source.fixAll": true
+					}
+				}
+			},
+			"extensions": [
+				"esbenp.prettier-vscode",
+				"ms-python.python",
+				"njpwerner.autodocstring",
+				"KevinRose.vsc-python-indent",
+				"charliermarsh.ruff",
+				"github.copilot"
+			]
+		}
 	}
 }
