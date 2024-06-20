@@ -61,3 +61,7 @@ for i in range(len(SC_data)):
     else:
         SC_data.loc[i, "efermi"] = None
         SC_data.loc[i, "band_gap"] = None
+
+
+# %%
+SC_data.to_csv("/workspaces/codespace_practice/codespace_test_module/CrabNet_train_data.csv", index=False)
