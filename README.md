@@ -1,2 +1,6 @@
 # codespace_practice
 Practice repository for github codespace
+
+現在の状態　materials projectからデータを取り出すためのスクリプトコンテナ
+ライブラリ管理状態は、poetryで管理されている
+crabnetを使ったNNはこちらにはない
