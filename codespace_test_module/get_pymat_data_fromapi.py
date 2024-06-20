@@ -20,25 +20,30 @@ with open("/workspaces/codespace_practice/codespace_test_module/formula_list_fro
     formula_list = pickle.load(f)
 
 # %%
-print(formula_list[31])
-
-# %%
 # define physical properties/infos you want to obtain
-properties = ["material_id", "formula_pretty", "band_gap", "efermi"]
+properties = ["material_id", "formula_pretty", "band_gap", "efermi", "energy_above_hull"]
 name = formula_list[1:]
 with MPRester(MY_API_KEY) as mpr:
     results = mpr.materials.summary.search(formula=name, fields=properties)
 
 
+#%%
+print(results[0])
 # %%
 for mat in results:
-    ofile = path_output_dir + mat.material_id + "_" + mat.formula_pretty + ".json"
+    ofile = path_output_dir + mat.material_id + "_" + mat.formula_pretty + ".pickle"
     # mat.structure.to(filename = ofile)
     # 原因は不明だが.structureで取り出すことが出来ない
     # 辞書式にしてpickleで保存する
 
-    output = {"formula": mat.formula_pretty, "material_id": mat.material_id, "band_gap": mat.band_gap, "efermi": mat.efermi}
-    with open(ofile, "wb") as f:
-        pickle.dump(output, f)
+    output = {"formula": mat.formula_pretty, "material_id": mat.material_id, "band_gap": mat.band_gap, "efermi": mat.efermi, "energy_above_hull": mat.energy_above_hull}
+    if os.path.exists(ofile):
+        print(f"Warning: The file {ofile} exists and will be overwritten.")
+    try:
+        with open(ofile, "wb") as f:
+            pickle.dump(output, f)
+    except Exception as e:
+        print("Dumpling failed: ", str(e))
+        
 
 # %%
