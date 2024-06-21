@@ -3,7 +3,7 @@
 # %%
 import os
 import pickle
-
+from chempy import Substance
 from mp_api.client import MPRester
 
 MY_API_KEY = "09vnTU6R8jWfPhuZ6bFs3niTwe1F03x4"

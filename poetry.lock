@@ -2444,6 +2444,20 @@ qa = ["flake8 (==5.0.4)", "mypy (==0.971)", "types-setuptools (==67.2.0.1)"]
 testing = ["docopt", "pytest"]
 
 [[package]]
+name = "periodictable"
+version = "1.7.0"
+description = "Extensible periodic table of the elements"
+optional = false
+python-versions = "*"
+files = [
+    {file = "periodictable-1.7.0.tar.gz", hash = "sha256:420e57c2b19d6a521b1c0b5e387da590a31a8456e4cc1c00bca5ce2dc5f05ea9"},
+]
+
+[package.dependencies]
+numpy = "*"
+pyparsing = "*"
+
+[[package]]
 name = "pexpect"
 version = "4.9.0"
 description = "Pexpect allows easy control of interactive console applications."
@@ -4739,4 +4753,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "ba3c1bf0818de18962c17f77fdc0c9ac8f4fa073ce2eba3dca4f6f6d27cc065c"
+content-hash = "97e58dc65a89a52660ff235b74c38a4776e73a9a0283b49b3fc363865f1f8632"

@@ -16,6 +16,7 @@ mp-api = "^0.41.2"
 ipykernel = "^6.29.4"
 pyarrow = "^16.1.0"
 chempy = "^0.9.0"
+periodictable = "^1.7.0"
 
 [build-system]
 requires = ["poetry-core"]
