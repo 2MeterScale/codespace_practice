@@ -13,6 +13,8 @@ import os
 
 #天才アイデア～train_material_listにある情報全部読み込んで一個のデータフレームにすればいいじゃんね
 
+
+
 # %% これは追加するmaterials projectのデータ成型用
 #一つのディレクトリ内の全データを読み込む
 read_dir = "/workspaces/codespace_practice/train_material_list"
@@ -40,6 +42,9 @@ for i, subdf in train_material_df.groupby("comp_number"):
         chosen_material_list.append(subdf.index[0])
 
 chosen_train_material_df = train_material_df.loc[chosen_material_list]
+
+
+
 # %% ver3を読み込んで構成元素の数字情報を作成
 SC_data = pd.read_csv("/workspaces/codespace_practice/codespace_test_module/final_SC_X_data_ver3.csv")
 SC_data = SC_data.dropna(subset=["new_formula"])
@@ -48,6 +53,8 @@ SC_data["new_formula"] = SC_data["new_formula"].astype(str)
 SC_data["comp_atoms"] = SC_data["new_formula"].apply(lambda x: Substance.from_formula(x).composition)
 SC_data["sorted_keys_comp_atoms"] = SC_data["new_formula"].apply(lambda x: sorted(Substance.from_formula(x).composition.keys()))
 SC_data["comp_number"] = SC_data.apply(lambda row: ''.join(f'{k}{row["comp_atoms"][k]}' for k in row["sorted_keys_comp_atoms"]), axis=1)
+
+
 
 # %% 二つのdfが用意できたので、これらのdfをもとに各ver3のほうのcomp_numberと
 #一致するmatproj側のfermiデータやらなんやらを足し合わせてNNモデルに突っ込む
@@ -64,4 +71,14 @@ for i in range(len(SC_data)):
 
 
 # %%
+SC_data = SC_data.dropna(subset=["efermi", "band_gap"])
+display(SC_data)
+
+
+#%%
+display(SC_data.loc[SC_data["band_gap"] != 0.0, ["new_formula", "band_gap"]])
+
+
+# %%
 SC_data.to_csv("/workspaces/codespace_practice/codespace_test_module/CrabNet_train_data.csv", index=False)
+# %%
