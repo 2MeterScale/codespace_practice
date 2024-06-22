@@ -110,3 +110,6 @@ except Exception as e:
 # %%
 display(chosen_cand_df)
 # %%
+#できたもの二つ目も保存しましょうね
+chosen_cand_df.to_csv("/workspaces/codespace_practice/candidate_material_list/candidate_material_list.csv", index=False)
+# %%
