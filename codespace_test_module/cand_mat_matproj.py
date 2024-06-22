@@ -31,10 +31,13 @@ if not os.path.exists(path_output_dir):
 properties = ["material_id", "formula_pretty", "band_gap", "efermi", "energy_above_hull"]
 #nameは*の数で構成する元素数を指定できる？
 name = "**"
-#nelements_maxで構成する元素数の最大値を指定できる
-#nelements_max = 5
+
+#他にはBa, Sr, Niとか?
+
+element_filter = "Ni"
+
 with MPRester(MY_API_KEY) as mpr:
-    results = mpr.materials.summary.search(fields=properties, elements = ["B"])
+    results = mpr.materials.summary.search(fields=properties, elements = [element_filter])
 
 
 # %%
@@ -74,15 +77,20 @@ for i, subdf in cand_df.groupby("comp_number"):
 
 chosen_cand_df = cand_df.loc[chosen_material_list]
 
+chosen_cand_df = chosen_cand_df.dropna(subset=["efermi"])
+
+chosen_cand_df = chosen_cand_df.reset_index(drop = True)
+
 
 
 # %%
 #できたものは保存しましょうね～
-chosen_cand_df.to_csv("/workspaces/codespace_practice/candidate_material_list/candidate_material_list.csv", index=False)
+#chosen_cand_df.to_csv("/workspaces/codespace_practice/candidate_material_list/candidate_material_list.csv", index=False)
+#chosen_cand_df = pd.read_csv("/workspaces/codespace_practice/candidate_material_list/candidate_material_list.csv")
 
 
 # %%
-chosen_cand_df = pd.read_csv("/workspaces/codespace_practice/candidate_material_list/candidate_material_list.csv")
+#どうやら一度保存してから再読み込みの形を取ると辞書型が崩れて文字型になるので以下の処理が必要
 chosen_cand_df["comp_atoms"] = chosen_cand_df["comp_atoms"].apply(ast.literal_eval)
 
 
@@ -111,5 +119,5 @@ except Exception as e:
 display(chosen_cand_df)
 # %%
 #できたもの二つ目も保存しましょうね
-chosen_cand_df.to_csv("/workspaces/codespace_practice/candidate_material_list/candidate_material_list.csv", index=False)
+chosen_cand_df.to_csv("/workspaces/codespace_practice/candidate_material_list/" + element_filter + "_candidate_material_list.csv", index=False)
 # %%
