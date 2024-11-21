@@ -16,6 +16,9 @@ XRD_doped_data = pd.read_csv("/workspaces/codespace_practice/XRD_graph/XRD_data/
 #二度焼きのデータ
 XRD_2doyaki_data = pd.read_csv("/workspaces/codespace_practice/XRD_graph/XRD_data/Li2ZnSn3O8_2ndyaki_20241022.txt")
 
+#Li多め単体のデータ
+XRD_moreLi_data = pd.read_csv("/workspaces/codespace_practice/XRD_graph/XRD_data/Li2.5ZnSn3O8_20241112.txt")
+
 # ICSDからのデータ
 ICSD_data = pd.read_csv("/workspaces/codespace_practice/XRD_graph/XRD_data/Li2ZnSn3O8_xy_ICSD.csv")
 ICSD_SnO2_data = pd.read_csv("/workspaces/codespace_practice/XRD_graph/XRD_data/SnO2_xy_ICSD.csv")
@@ -35,6 +38,7 @@ ICSD_SnO2_data["2theta"] = [x - 0.08 for x in ICSD_SnO2_data["2theta"]]
 XRD_max = XRD_data["Intensity"].max()
 XRD_doped_max = XRD_doped_data["Intensity"].max()
 XRD_2doyaki_max = XRD_2doyaki_data["Intensity"].max()
+XRD_moreLi_max = XRD_moreLi_data["Intensity"].max()
 ICSD_max = ICSD_data["Intensity"].max()
 ICSD_SnO2_max = ICSD_SnO2_data["Intensity"].max()
 ICSD_ZnO_max = ICSD_ZnO_data["Intensity"].max()
@@ -45,6 +49,7 @@ ICSD_Li16Zn16Sn28O8_max = ICSD_Li16Zn16Sn28O8_data["Intensity"].max()
 
 XRD_doped_data["Intensity"] = XRD_doped_data["Intensity"] * XRD_max / XRD_doped_max
 XRD_2doyaki_data["Intensity"] = XRD_2doyaki_data["Intensity"] * XRD_max / XRD_2doyaki_max
+XRD_moreLi_data["Intensity"] = XRD_moreLi_data["Intensity"] * XRD_max / XRD_moreLi_max
 ICSD_data["Intensity"] = ICSD_data["Intensity"] * XRD_max / ICSD_max
 ICSD_SnO2_data["Intensity"] = ICSD_SnO2_data["Intensity"] * 63.3333 / ICSD_SnO2_max
 ICSD_ZnO_data["Intensity"] = ICSD_ZnO_data["Intensity"] * 17.5 / ICSD_ZnO_max
@@ -74,6 +79,7 @@ XRD_doped_data["2theta"] = [x - 0.08 for x in XRD_doped_data["2theta"]]
 source_XRD = ColumnDataSource(data=dict(x=XRD_data["2theta"], y=XRD_data["Intensity"]))
 source_XRD_doped = ColumnDataSource(data=dict(x=XRD_doped_data["2theta"], y=XRD_doped_data["Intensity"]))
 source_XRD_2doyaki = ColumnDataSource(data=dict(x=XRD_2doyaki_data["2theta"], y=XRD_2doyaki_data["Intensity"]))
+source_XRD_moreLi = ColumnDataSource(data=dict(x=XRD_moreLi_data["2theta"], y=XRD_moreLi_data["Intensity"]))
 source_ICSD = ColumnDataSource(data=dict(x=ICSD_data["2theta"], y=ICSD_data["Intensity"]))
 source_ICSD_SnO2 = ColumnDataSource(data=dict(x=ICSD_SnO2_data["2theta"], y=ICSD_SnO2_data["Intensity"]))
 source_ICSD_ZnO = ColumnDataSource(data=dict(x=ICSD_ZnO_data["2theta"], y=ICSD_ZnO_data["Intensity"]))
@@ -90,18 +96,19 @@ p = figure(title="Li2ZnSn3O8 XRD data", x_axis_label="2theta", y_axis_label="Int
 p.line("x", "y", source=source_XRD, legend_label="XRD_Li2ZnSn3O8", line_width=1, color="blue")
 p.line("x", "y", source=source_XRD_doped, legend_label="XRD_Li2.5Zn0.8Ga0.2Sn3O8", line_width=1, color="yellow")
 #p.line("x", "y", source=source_XRD_2doyaki, legend_label="XRD_Li2ZnSn3O8_2ndyaki", line_width=1, color="orange")
+p.line("x", "y", source=source_XRD_moreLi, legend_label="XRD_Li2.5ZnSn3O8", line_width=1, color="green")
 p.line("x", "y", source=source_ICSD, legend_label="ICSD_Li2ZnSn3O8", line_width=1, color="red")
-p.line("x", "y", source=source_ICSD_SnO2, legend_label="ICSD_SnO2", line_width=1, color="green")
-p.line("x", "y", source=source_ICSD_ZnO, legend_label="ICSD_ZnO", line_width=1, color="purple")
+#p.line("x", "y", source=source_ICSD_SnO2, legend_label="ICSD_SnO2", line_width=1, color="green")
+#p.line("x", "y", source=source_ICSD_ZnO, legend_label="ICSD_ZnO", line_width=1, color="purple")
 # p.line("x", "y", source=source_ICSD_Zn2SnO4, legend_label="ICSD_Zn2SnO4", line_width=1, color="orange")
 # p.line("x", "y", source=source_ICSD_Li2SnO3, legend_label="ICSD_Li2SnO3", line_width=1, color="orange")
-p.line("x", "y", source=source_ICSD_Li2O2, legend_label="ICSD_Li2O2", line_width=1, color="orange")
+#p.line("x", "y", source=source_ICSD_Li2O2, legend_label="ICSD_Li2O2", line_width=1, color="orange")
 # p.line("x", "y", source=source_ICSD_Li16Zn16Sn28O8, legend_label="ICSD_Li1.6Zn1.6Sn2.8O8", line_width=1, color="orange")
 
 p.add_tools(HoverTool(), CrosshairTool(), UndoTool(), RedoTool())
 p.legend.click_policy = "hide"
 
-output_file("/workspaces/codespace_practice/XRD_graph/Li2.5Zn0.8Ga0.2Sn3O8_Ga_doped_graph_20241017.html")
+output_file("/workspaces/codespace_practice/XRD_graph/Li2.5ZnGaSn3O8_Ga_graph_20241112.html")
 save(p)
 
 # %%
