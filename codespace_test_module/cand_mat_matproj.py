@@ -15,10 +15,10 @@ from mp_api.client import MPRester
 pd.options.display.max_columns = 100
 pd.options.display.max_rows = 100
 
-MY_API_KEY = "09vnTU6R8jWfPhuZ6bFs3niTwe1F03x4"
+MY_API_KEY = "4e1LpV3Y9BIF4LLPaT8iL4coIVUnCIPF"
 
 # Output directory
-path_output_dir = "/workspaces/codespace_practice/candidate_material_list_final/"
+path_output_dir = "/Users/2ms/Documents/GitHub/SC_AI/candidate_material_list_final/"
 if not os.path.exists(path_output_dir):
     os.makedirs(path_output_dir)
     
